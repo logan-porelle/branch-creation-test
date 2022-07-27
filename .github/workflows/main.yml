@@ -1,17 +1,21 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Check Branch Name
 
 # Controls when the workflow will run
 on:
   create
 
 jobs:
+
   new_branch:
+    
+    if: github.event.ref_type == "branch"
     runs-on: ubuntu-latest
-  
+
     steps:
-      - uses: goshencollege/validate-branch-name@v1.0.1
-        with:
-          pattern: "^[a-z-]+$"
+      - uses: actions/checkout@v3
+      
+      - name: check-branch
+        run: echo 'Yep thats a branch name'
         
