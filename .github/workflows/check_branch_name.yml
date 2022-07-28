@@ -1,0 +1,22 @@
+name: Check branch name
+
+on: create
+
+jobs:
+  new_feature_branch:
+    name: Feature branch created
+    if: github.event.ref_type == 'branch' && startsWith(github.event.ref, 'feature/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure feature branch
+        run: echo 'Do thing on feature branch'
+      
+  new_random_branch:
+    name: Branch with non-standard naming created
+    if: github.event.ref_type == 'branch' && !startsWith(github.event.ref, 'feature/')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Configure branch
+        run: echo 'Do thing on random branch'
